@@ -85,7 +85,8 @@ def download_video(url, video_name):
     # Write the updated data back to video.json
     with open("video.json", "w") as json_file:
         json.dump(existing_data, json_file, indent=4)
-
+    os.remove(metadata_file)
+    
     return video_data
 
 
