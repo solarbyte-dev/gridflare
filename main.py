@@ -20,9 +20,14 @@ local_ip = get_local_ip()
 def run_server():
     # Use 0.0.0.0 to bind to all network interfaces, not just localhost
     with TCPServer(("", PORT), SimpleHTTPRequestHandler) as httpd:
-        print(f"Serving at port {PORT}")
-        print(f"Visit: http://{local_ip}:{PORT} (from the local network)")
-        print(f"Or you can try: http://{get_local_ip()}:{PORT} from other devices")
+        print("\n-------------------------- GridFlare ---------------------------")
+        print(f"  Server is running on port >> {PORT}...")
+        print(f"  Access the server locally at: http://localhost:{PORT}")
+        print(f"  OR, access it from other devices on the same network via:")
+        print(f"    http://{local_ip}:{PORT}")
+        print("-----------------------------------------------------------------")
+        print("  Press Ctrl+C to stop the server.")
+        print("-----------------------------------------------------------------")
         httpd.serve_forever()
 
 if __name__ == "__main__":
