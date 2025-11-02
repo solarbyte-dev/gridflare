@@ -88,6 +88,7 @@ It’s really simple. I used the [Plyr.js](https://github.com/sampotts/plyr) lib
 * More options (like sorting stuff, tags etc)
 * An  updating script; auto-generating thumbnails
 * Add keyboard shortcuts for video controls (because I like mpv too much)
+* Add an actual TUI using textual
 
 ---
 
