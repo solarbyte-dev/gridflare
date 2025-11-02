@@ -19,7 +19,9 @@ git clone https://github.com/solarbyte-dev/gridflare
 ```
 2. Get the videos:
 ```bash
-python lazydown.py [YOUTUBE_LINK] [NAME_OF_VIDEO]
+python lazydown.py
+Enter video URL: {URL}
+Enter name: {NAME}
 ```
 3. Run the server:
 ```bash
