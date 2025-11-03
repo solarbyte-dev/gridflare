@@ -146,6 +146,7 @@ def show_menu():
         choice = input("Choose an option (1/2/3): ").strip()
 
         if choice == "1":
+            print("Choose Port: ")
             start_server()
         elif choice == "2":
             start_video_download()
