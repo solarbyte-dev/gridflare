@@ -1,3 +1,8 @@
+# MP4, webp, json files to avoid headaches
+*.mp4
+*.webp
+*.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -22,8 +22,7 @@ def run_server():
     with TCPServer(("", PORT), SimpleHTTPRequestHandler) as httpd:
         print("\n-------------------------- GridFlare ---------------------------")
         print(f"  Server is running on port >> {PORT}...")
-        print(f"  Access the server locally at: http://localhost:{PORT}")
-        print(f"  OR, access it from other devices on the same network via:")
+        print("Access it from other devices on the same network via:")
         print(f"    http://{local_ip}:{PORT}")
         print("-----------------------------------------------------------------")
         print("  Press Ctrl+C to stop the server.")

@@ -27,6 +27,10 @@ Enter name: {NAME}
 ```bash
 python main.py
 ```
+
+>[!IMPORTANT]
+> The gitignore here ignores json as well becuase of leftover files, so create your own video.json file, it will be fixed later. 
+
 > [!NOTE]
 > If you plan to use any other downloading service/want to sync already downloaded videos, then go over to video.json and fill the details correctly for each video, a future update will address this
 
