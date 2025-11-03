@@ -17,16 +17,11 @@ Pre-requisties: `Python 3.9+`, `yt-dlp`, `ffmpeg`
 ```bash
 git clone https://github.com/solarbyte-dev/gridflare
 ```
-2. Get the videos:
+2. Run Script:
 ```bash
-python lazydown.py
-Enter video URL: {URL}
-Enter name: {NAME}
+python gridflare.py
 ```
-3. Run the server:
-```bash
-python main.py
-```
+then you can download as many videos as you want and start server from a TUI
 
 >[!IMPORTANT]
 > The gitignore here ignores json as well becuase of leftover files, so create your own video.json file, it will be fixed later. 

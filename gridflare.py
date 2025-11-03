@@ -2,9 +2,40 @@ import os
 import subprocess
 import json
 import shutil
+import socket
+from http.server import SimpleHTTPRequestHandler
+from socketserver import TCPServer
 
+# Directories
 VIDEO_DIR = "video/"
 THUMBNAIL_DIR = "thumbnails/"
+
+# Make sure the required directories exist
+os.makedirs(VIDEO_DIR, exist_ok=True)
+os.makedirs(THUMBNAIL_DIR, exist_ok=True)
+
+# Port for HTTP server
+PORT = 8080
+
+# Get the local IP of the machine
+def get_local_ip():
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
+    return ip_address
+
+local_ip = get_local_ip()
+
+def run_server():
+    """Starts the HTTP server and provides the access URL."""
+    with TCPServer(("", PORT), SimpleHTTPRequestHandler) as httpd:
+        print("\n-------------------------- GridFlare ---------------------------")
+        print(f"  Server is running on port >> {PORT}...")
+        print("Access it from other devices on the same network via:")
+        print(f"    http://{local_ip}:{PORT}")
+        print("-----------------------------------------------------------------")
+        print("  Press Ctrl+C to stop the server.")
+        print("-----------------------------------------------------------------")
+        httpd.serve_forever()
 
 def get_video_length(file_path):
     """Get the length of the video in seconds using ffprobe."""
@@ -17,9 +48,9 @@ def get_video_length(file_path):
 
 def move_thumbnail(video_name):
     """Move the downloaded thumbnail from the video folder to the thumbnails folder."""
-    thumbnail_name = f"{VIDEO_DIR}{video_name}.webp"  # yt-dlp downloads it with the video name
-    new_thumbnail_path = f"{THUMBNAIL_DIR}{video_name}.webp"  # Saving as .webp
-
+    thumbnail_name = f"{VIDEO_DIR}{video_name}.webp"
+    new_thumbnail_path = f"{THUMBNAIL_DIR}{video_name}.webp"
+    
     if os.path.exists(thumbnail_name):
         print(f"Found thumbnail! Moving it to {new_thumbnail_path}")
         shutil.move(thumbnail_name, new_thumbnail_path)
@@ -85,23 +116,45 @@ def download_video(url, video_name):
     # Write the updated data back to video.json
     with open("video.json", "w") as json_file:
         json.dump(existing_data, json_file, indent=4)
+
     os.remove(metadata_file)
-    
+
     return video_data
 
-
-def main():
-    # Get user input for video URL and name
+def start_video_download():
+    """Handles video downloading process."""
     url = input("Enter the video URL: ")
     video_name = input("Enter the name for the video (no spaces, no special chars): ")
-
-    # Download and process video
     video_data = download_video(url, video_name)
     if video_data:
         print(f"Downloaded and saved video data: {video_data}")
     else:
         print("Error: Video download or processing failed.")
 
+def start_server():
+    """Start the local server."""
+    run_server()
+
+def show_menu():
+    """Display the TUI menu and handle user input."""
+    while True:
+        print("\n-------------------- GridFlare ---------------------")
+        print("1 >> Start HTTP Server")
+        print("2 >> Download Video")
+        print("3 >> Exit")
+        print("------------------------------------------------------")
+        choice = input("Choose an option (1/2/3): ").strip()
+
+        if choice == "1":
+            start_server()
+        elif choice == "2":
+            start_video_download()
+        elif choice == "3":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice, please try again.")
+
 if __name__ == "__main__":
-    main()
+    show_menu()
 
