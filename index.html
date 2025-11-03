@@ -360,12 +360,14 @@
         container.appendChild(thumbnailItem);
     }
 
-    // Format duration into a human-readable format (mm:ss)
+    // Format duration in "hh:mm:ss" format
     function formatDuration(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = Math.floor(seconds % 60);
-        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const sec = Math.floor(seconds % 60);
+        return `${hours ? hours + ':' : ''}${minutes}:${sec < 10 ? '0' + sec : sec}`;
     }
+
 </script>
 
 
